@@ -53,7 +53,7 @@ class CephOsdPlugin(base.Base):
         } }
         output = None
         try:
-            cephosdcmdline='ceph osd dump --format json --cluster ' + self.cluster
+            cephosdcmdline='docker exec ceph_mon ceph osd dump --format json --cluster ' + self.cluster
             output = subprocess.check_output(cephosdcmdline, shell=True)
         except Exception as exc:
             collectd.error("ceph-osd: failed to ceph osd dump :: %s :: %s"
